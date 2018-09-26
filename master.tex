@@ -1,57 +1,321 @@
-\documentclass[aps,superscriptaddress,tightenlines,nofootinbib,floatfix,longbibliography]{revtex4-1}
-\usepackage[left=18mm,right=19mm,top=23mm,bottom=16mm]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{bm}
-\usepackage{comment}
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{slashed}
-\usepackage[
-    colorlinks=true,
-    allcolors=blue
-]{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{authblk}
+%\usepackage{amsaddr}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\pagestyle{fancy}
+\rfoot{Compiled on \today\ at \currenttime}
+\cfoot{}
+\lfoot{Page \thepage}
+\RequirePackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes} % look for '\todo'
+\definecolor{darkred}{rgb}{0.4,0.0,0.0}
+\definecolor{darkgreen}{rgb}{0.0,0.4,0.0}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.4}
+\usepackage[bookmarks,linktocpage,colorlinks,
+    linkcolor = darkred,
+    urlcolor  = darkblue,
+    citecolor = darkgreen]{hyperref}
 
+%\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
+\renewcommand{\headrulewidth}{0pt}
+%\fancyhead[L]{
+%\includegraphics[width=4cm]{/Users/tomluu/Research/talks/fzjTemplate/uniBonn_logo.jpg}
+%}
+%\fancyhead[R]{
+%\includegraphics[width=4cm]{/Users/tomluu/Research/talks/fzjTemplate/fzj_logo.jpg}
+%}
+\pagestyle{plain}
 
-%%%
-%%%     Draft margin.
-%%%
+\title{L\"uscher's formula in 3, 2, 1 (lift off!) dimensions}
+\author[1]{Evan Berkowitz}
+\author[1,2]{Thomas Luu}
+\affil[1]{Institute for Advanced Simulation 4\\
+Forschungszentrum J\"ulich, Germany}
+\affil[2]{Rheinische Friedrich-Williams-Universit\"at Bonn, Germany}
 
-\usepackage[
-    angle=90,
-    color=black,
-    opacity=1,
-    scale=2,
-    ]{background}
-\SetBgPosition{current page.west}
-\SetBgVshift{-4.5mm}
-\backgroundsetup{contents={\input{git_information}}}
-
-\input{macros} % input rather than include so we don't create macros.aux
-
-%%%%
-%%%%    Document preparation
-%%%%
+%\email{t.luu@fz-juelich.de}
+\date{}                                           % Activate to display a given date or no date
 
 
 \begin{document}
-
-\title{Example \LaTeX + \texttt{git} }
-
-\author{Evan Berkowitz}
-
-\date{\today}
-
-\begin{abstract}
-Here's a bare-bones example where I set up a \git repo with all the \LaTeX-related things that I like.
-\end{abstract}
-
 \maketitle
+\begin{center}
+email: \href{mailto:t.luu@fz-juelich.de}{t.luu@fz-juelich.de}
+\end{center}
+\abstract{
+We derive L\"uscher's formula for a torus in 3, 2, and 1 dimensions.
+}
 
-\input{section/introduction}
-\input{section/hooks}
-\input{section/make}
+\thispagestyle{fancy}
 
+\clearpage{}
+%\tableofcontents
+%\newpage
+
+\section{Setup}
+We consider two interacting particles of equal mass $m$.  We assume a pure contact interaction (regulated if needed depending on dimension),
+\begin{equation}
+V(\vec{r})=C_0(\Lambda)\delta(\vec{r})\ ,
+\end{equation}
+where $\vec{r}$ represents the relative distance between the two particles and $C_0(\Lambda)$ is the strength of interaction that in principle depends on the regulator and whose units depend on the spatial dimension $d$.  We also assume the system has zero CM motion (i.e. $\vec{P}_{cm}=0$) to make the problem simpler. The relevant diagram to calculate, both for infinite and finite volume, is the bubble sum shown in \autoref{fig:bubbleSum}:
+\begin{figure}[h!]
+\center
+\includegraphics[width=.8\columnwidth]{figure/bubbleSum.eps}
+\caption{Bubble sum. Each vertex represents $-iC_0$ and the bubble represents $I_0$.\label{fig:bubbleSum}}
+\end{figure}
+
+\noindent The sum is a geometric series and gives\footnote{Note that the {\color{red} red} minus sign in Eq.~\eqref{eqn:scattering amplitude} is missing in the archive version of \cite{Beane:2003da}, but is present in \cite{Kaplan:1998we}.}
+\begin{equation}\label{eqn:scattering amplitude}
+\frac{{\color{red}-}iC_0(\Lambda)}{1-I_0(p,\Lambda)C_0(\Lambda)}\equiv iT(p)\ ,
+\end{equation}
+where $T$ is the standard T-matrix, $p$ is the relative momentum,  and $I_0(p,\Lambda)$ is a $d$-dependent function (more on this later).  Since we assume a momentum-independent contact interaction, this problem only affects s-wave systems, and the T-matrix in $d$ spatial dimensions can be related to the s-wave phase shift $\delta_0$ by
+\begin{equation}
+T=\frac{4}{m}\mathcal{F}_d\frac{1}{\cot \delta_0(p)-i}\ ,
+\end{equation}
+where
+\begin{equation}
+\mathcal{F}_d=
+\begin{cases}
+\pi/p & (d=3)\\
+1 & (d=2)\\
+p/2 & (d=1)
+\end{cases}\ .
+\end{equation}
+Therefore we have
+\begin{equation}\label{eqn:T matrix matching}
+\boxed{
+\frac{4}{m}\mathcal{F}_d\frac{1}{\cot \delta_0(p)-i}=\frac{-C_0(\Lambda)}{1-I_0(p,\Lambda)C_0(\Lambda)}
+}\ .
+\end{equation}
+We can recast Eq.~\eqref{eqn:T matrix matching},
+\begin{equation}\label{eqn:matching}
+\cot \delta_0(p)-i=\frac{4}{m}\mathcal{F}_d\left(\frac{-1}{C_0(\Lambda)}+I_0(p,\Lambda)\right)\ .
+\end{equation}
+For the special case of a delta function interaction, one has \cite{busch1998}
+\begin{equation}\label{eqn:phase shifts}
+\cot \delta_0(p) = 
+\begin{cases}
+ - \frac{1}{a _ { 0 }p }&\quad d=3  \\ 
+\frac { 2 } { \pi } \log \left( p a _ { 0 } \right) & \quad d=2\\ 
+ p a _ { 0 } &\quad d=1
+ \end{cases}\ ,
+\end{equation}
+where $a_0$ is the scattering length.
+
+%\newpage
+\subsection{Infinite volume $I_0$}
+Consider the following diagram defining $I_0$:
+\begin{figure}[h!]
+\center
+\includegraphics[width=.5\columnwidth]{figure/I0.eps}
+\caption{\label{fig:I0}}
+\end{figure}
+
+\noindent The loop integral with $E=p^2/m$ (on-shell relation) gives
+\begin{multline}\label{eqn:I0 general}
+I_0(p)=-i\int^\Lambda \frac { \mathrm {d}q_0 \mathrm { d } ^ { d } \mathbf { q } } { ( 2 \pi ) ^ { d+1 } } \left( \frac { i } { \frac{E}{2} + q _ { 0 } - \frac{\vec{q}^2}{2m} + i \epsilon } \right) \left( \frac { i } { \frac{E}{2} - q _ { 0 } - \frac{\vec{q}^2}{2m} + i \epsilon } \right)\\
+=\int^\Lambda \frac { \mathrm { d } ^ { d  } \mathbf { q } } { ( 2 \pi ) ^ { d } } \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} + i \epsilon } \right)
+=\frac{\Omega_d}{(2\pi)^d}\int^\Lambda  \mathrm { d } q \ q^{d-1} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} - i \epsilon } \right)\\
+=\frac{\Omega_d}{(2\pi)^d}\int^\Lambda  \mathrm { d } q \ q^{d-1}\left[\mathcal{P} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\pi\delta(E-\vec{q}^2/m)\right]\\
+=\frac{\Omega_d}{(2\pi)^d}\int^\Lambda  \mathrm { d } q \ q^{d-1}\left[\mathcal{P} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]
+\ ,
+\end{multline}
+where $\mathcal{P}$ refers to Principle (Cauchy) Value and
+\begin{equation}
+\Omega_d=\frac{2\pi^{d/2}}{\Gamma(d/2)}=
+\begin{cases}
+4\pi&\quad\quad d=3\\
+2\pi&\quad\quad d=2\\
+\ 2\ &\quad\quad d=1
+\end{cases}\ ,
+\end{equation}
+and $d$ is the dimension and $\Lambda$ represents a regulator if needed (for 3-dimensions).  We will now do the integral for each dimension and determine $C_0(\Lambda)$ for each case.
+
+\subsubsection{$d=3$}
+Here we must choose a regulator to tame the integral in $I_0$.  The coefficient $C_0(\Lambda)$ will depend on this regulator such that observables are \emph{independent} of it.  Here we choose a simple hard cutoff in maximum momentum $\Lambda$.  There are other possibilities;  we could have chosen a Pauli-Villars (Gaussian) regulator, or dim-reg (e.g. see \cite{Kaplan:1998we}).  As with all calculations, at the end we will formally take the $\Lambda\to\infty$ limit.  Equation~\eqref{eqn:I0 general} becomes
+\begin{multline}
+\frac{1}{2\pi^2}\int_0^\Lambda  \mathrm { d } q \ q^2\left[\mathcal{P} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]\\
+=\frac{1}{2\pi^2}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q^2 \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\frac{m}{4\pi}p\ ,
+\end{multline}
+where we have used the on-shell condition $\sqrt{mE}=p$.  If we plug this into Eq.~\eqref{eqn:matching} we get
+\begin{equation}\label{eqn:matching 2}
+p\cot \delta_0(p)-ip=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}+\frac{1}{2\pi^2}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q^2 \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)\right)-ip\ .
+\end{equation}
+For general interactions (not just contact), we can determine $C_0(\Lambda)$ by looking at the $E=0$ threshold.  In this limit one has
+\begin{equation}\label{eqn:matching 3}
+-\frac{1}{a_0}=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}+\frac{1}{2\pi^2}\int_0^\Lambda  \mathrm { d } q \ q^2 \left( \frac { 1 } {  - \frac{\vec{q}^2}{m} } \right)\right)
+=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}-\frac{m\Lambda}{2\pi^2}\right)
+%=\frac{4\pi}{m}\frac{1}{C_0(\Lambda)}+\frac{2\Lambda}{\pi}\.
+\end{equation}
+Solving for $C_0(\Lambda)$ gives
+\begin{equation}\label{eqn:C 3}
+C_0(\Lambda)=\frac{4\pi/m}{1/a_0-2\Lambda/\pi}\ .
+\end{equation}
+
+\subsubsection{$d=2$}
+We also have to regulate in this dimension, and use the same hard cutoff as in $d=3$.  Equation~\eqref{eqn:I0 general} becomes
+\begin{multline}
+\frac{1}{2\pi}\int_0^\Lambda  \mathrm { d } q \ q\left[\mathcal{P} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]\\
+=\frac{1}{2\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\frac{m}{4}\ .
+\end{multline}
+Plugging this into Eq.~\eqref{eqn:matching} gives
+\begin{multline}
+\cot \delta_0(p)-i=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{m\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\\
+\implies \frac { 2 } { \pi } \log \left( p a _ { 0 } \right)=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{m\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { \frac{p^2}{m} - \frac{\vec{q}^2}{m} } \right)\ ,
+\end{multline}
+where we plugged in the relevant expression from Eq.~\eqref{eqn:phase shifts}.
+We now perform the integral,
+\begin{multline}
+\frac { 2 } { \pi } \log \left( p a _ { 0 } \right)=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{\pi } \log \left(\frac{p}{\sqrt{\Lambda ^2-p^2}}\right)\\
+=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{\pi } \log \left(\frac{p}{\Lambda}\right)+\mathcal{O}(p^2)
+\end{multline}
+and solve for $C_0(\Lambda)$,
+\begin{equation}\label{eqn:C 2}
+C_0(\Lambda)%=\frac{2 \pi }{m \log (a_0\sqrt{\Lambda ^2-p^2})}
+=-\frac{2 \pi }{m \log (a_0\Lambda)}\ .
+\end{equation}
+   
+\subsubsection{$d=1$}
+No regulator is needed in this case.  We have
+\begin{equation}
+\frac{1}{\pi}\int_{0}^{\infty}  \mathrm { d } q \left[\mathcal{P} \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
+-i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]
+=-i\frac{m}{2p}\ ,
+\end{equation}
+Plugging this into Eq.~\eqref{eqn:matching} gives
+\begin{equation}
+\cot \delta_0(p)-i=\frac{2p}{m}\frac{-1}{C_0(\Lambda)}-i
+\implies p a_0=\frac{2p}{m}\frac{-1}{C_0(\Lambda)}\ ,
+\end{equation}
+which gives
+\begin{equation}\label{eqn:C 1}
+C_0(\Lambda)=-\frac{2}{ma_0}\ .
+\end{equation}
+Note that this coefficient is independent of $\Lambda$, which is a consequence of the fact that $I_0$ is well behaved.
+
+\subsection{Finite volume}
+The biggest change, when going to the finite volume is that the loop integral in $I_0$ becomes a sum over allowed momentum states.  Each momentum component satisfies
+\begin{equation}
+p_n\equiv \frac{2\pi}{L}n\ ,
+\end{equation}
+where $n$ is an integer and $L$ is the length of one side of the volume.  One has
+\begin{multline}
+I_0(p,L)=-i\int \frac { \mathrm {d}q_0}{2\pi} \frac{1}{L^d}\sum_{\vec{q}}^\Lambda \left( \frac { i } { \frac{E}{2} + q _ { 0 } - \frac{\vec{q}^2}{2m} + i \epsilon } \right) \left( \frac { i } { \frac{E}{2} - q _ { 0 } - \frac{\vec{q}^2}{2m} + i \epsilon } \right)\\
+=\frac{1}{L^d}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} } \ .
+\end{multline}
+Since We are interested in the eigenstates of the interacting system in the finite volume, we look for solutions that satisfy
+\begin{equation}\label{eqn:quantization}
+\frac { 1 } { C _ { 0 } (\Lambda ) } - \operatorname { Re } \left( I_0(p,L) \right) = 0\ .
+\end{equation}
+This expression gives the poles of Eq.~\eqref{eqn:scattering amplitude} but using a finite volume version of $I_0$.  With the expressions for $C_0(\Lambda)$ derived in the previous section we can re-derive L\"uscher's quantization conditions in the different dimensions.
+
+\subsubsection{$d=3$}
+Using Eq.~\eqref{eqn:C 3} in Eq.~\eqref{eqn:quantization} we find
+\begin{multline}
+\frac{1/a_0-2\Lambda/\pi}{4\pi/m}-\frac{1}{L^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
+\implies-\frac{1}{a_0}=-\frac{4\pi}{mL^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }-\frac{2\Lambda}{\pi}\ .
+\end{multline}
+Now if we re-express the LHS in terms of the scattering phase relation given by Eq.~\eqref{eqn:phase shifts} (which is valid for delta function interactions), and after a little manipulation, we get
+\begin{align}
+p\cot \delta(p)&=\frac{1}{\pi L}\sum_{\vec{n}}^{\Lambda L/2\pi} \frac { 1 } { \vec{n}^2 -\left(\frac{pL}{2\pi}\right)^2}-\frac{2\Lambda}{\pi}\\
+&\equiv \frac{1}{\pi L}S_3\left(\left(\frac{pL}{2\pi}\right)^2\right)\ ,
+\end{align}
+where $\vec{n}=(n_x,n_y,n_z)$ is a triplet of integers, 
+\begin{equation}\label{eqn:S3}
+S_3(x)\equiv\sum_{\vec{n}}^{\Lambda'} \frac { 1 } { \vec{n}^2 -x}-4\pi\Lambda'\ ,
+\end{equation}
+and $\Lambda'=\frac{\Lambda L}{2\pi}$.  The limit $\Lambda'\to\infty$ is implicit.  \autoref{fig:S3} shows this function. This reproduces L\"uscher's formula. 
+\begin{figure}
+\center
+\includegraphics[width=.8\columnwidth]{figure/S3.pdf}
+\caption{The function $S_3(x)$ defined in Eq.~\eqref{eqn:S3}.\label{fig:S3}}
+\end{figure}
+
+\subsubsection{$d=2$}
+Using Eq.~\eqref{eqn:C 2} in Eq.~\eqref{eqn:quantization} we find
+\begin{multline}
+-\frac{m \log (a_0\Lambda)}{2 \pi }-\frac{1}{L^2}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
+\implies
+\frac{2}{\pi}\log (pa_0)+\frac{2}{\pi}\log(\Lambda/p)=-\frac{4}{mL^2}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }\ .
+\end{multline}
+Now as in the previous section, we use the phase shift relation of Eq.~\eqref{eqn:phase shifts}, and after a little manipulation, We find
+\begin{equation}
+\cot \delta(p)=\frac{1}{\pi^2}S_2\left(\left(\frac{pL}{2\pi}\right)^2\right)+\frac{2}{\pi}\log\left(\frac{pL}{2\pi}\right)\ ,
+\end{equation}
+where\todo{need to calculate this function}
+\begin{equation}\label{eqn:S2}
+S_2(x)\equiv\sum_{\vec{n}}^{\Lambda'} \frac { 1 } { \vec{n}^2 -x}-\frac{2}{\pi}\log\left(\Lambda'\right)\ .
+\end{equation}
+Here $\vec{n}=(n_x,n_y)$ is a doublet of integers and the limit $\Lambda'\to\infty$ is implicit.  This is new for me!
+
+\subsubsection{$d=1$}
+Using Eq.~\eqref{eqn:C 1} in Eq.~\eqref{eqn:quantization} We find
+\begin{equation}
+-\frac{ma_0}{2}-\frac{1}{L}\sum_{\vec{q}} \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0
+\implies
+p a_0=-\frac{2p}{mL}\sum_{\vec{q}} \frac { 1 } { E - \frac{\vec{q}^2}{m} }\ .
+\end{equation}
+Again, We use Eq.~\eqref{eqn:phase shifts}, and after a little manipulation, We get
+\begin{align}
+\frac{1}{p}\cot\delta_0(p)=a_0&=\frac{L}{2\pi^2}\sum_{n=-\infty}^{\infty} \frac { 1 } { n^2 -\left(\frac{pL}{2\pi}\right)^2}\\
+ &\equiv\frac{L}{2\pi^2} S_1\left(\left(\frac{pL}{2\pi^2}\right)^2\right)\ ,
+\end{align}
+where
+\begin{equation}\label{eqn:S1}
+S_1(x)\equiv\sum_{n=-\infty}^{\infty} \frac { 1 } { n^2 -x}=-\pi\frac{\cot(\pi\sqrt{x})}{\sqrt{x}}\ .
+\end{equation}
+This function is valid for $x$ both positive and negative, and is shown in \autoref{fig:S1}.
+\begin{figure}
+\center
+\includegraphics[width=.8\columnwidth]{figure/S1.pdf}
+\caption{The function $S_1(x)$ defined in Eq.\eqref{eqn:S1}.\label{fig:S1}}
+\end{figure}
+Now this is also new for me!
+
+\begin{itemize}
+\item Bound state in $L\to\infty$ limit\todo{needs work}
+\item Scattering states in $L\to\infty$\todo{needs work}
+\end{itemize}
+
+
+\section{Recap}
+My findings for L\"uscher's formula in the different dimensions are
+\begin{align}
+p\cot \delta(p)&=\frac{1}{\pi L}S_3\left(\left(\frac{pL}{2\pi}\right)^2\right)&(d=3)\\
+\cot \delta(p)&=\frac{1}{\pi^2}S_2\left(\left(\frac{pL}{2\pi}\right)^2\right) +\frac{2}{\pi}\log\left(\frac{pL}{2\pi}\right)&(d=2)\\
+\frac{1}{p}\cot\delta_0(p)&= 
+\frac{L}{2\pi^2} S_1\left(\left(\frac{pL}{2\pi}\right)^2\right)
+ &(d=1)
+\end{align}
+where $S_3(x)$, $S_2(x)$, and $S_1(x)$ are given by Eqs.~\eqref{eqn:S3},~\eqref{eqn:S2}, and~\eqref{eqn:S1}, respectively.
+
+
+%\subsection{}
+
+%\newpage
+%\appendix
+
+%\clearpage
+\bibliographystyle{h-physrev3}
 \bibliography{master}
 
-\end{document}
+\end{document}  
