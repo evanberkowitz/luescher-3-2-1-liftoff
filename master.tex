@@ -112,7 +112,12 @@ For the special case of a delta function interaction, one has \cite{busch1998}
  p a _ { 0 } &\quad d=1
  \end{cases}\ ,
 \end{equation}
-where $a_0$ is the scattering length.
+where $a_0$ is the scattering length. \autoref{fig:phaseShifts} plots these phase shifts for the different dimensions.  For $d=1,2$ the phase shift asymptotes to zero as $pa_0\to\infty$, while for $d=3$ the phase shift asymptotes to $\pi/2$, corresponding to the (unphysical) fact that the delta function interaction is `felt' at all momentum scales\todo{But the delta function is felt at all momenta in $d=1,2$ cases too, right?}.
+\begin{figure}
+\center
+\includegraphics[width=.8\columnwidth]{figure/phaseShift.pdf}
+\caption{Phase shift $\delta(p)$, modulo $\pi$, as a function of $pa_0$ for the contact interaction in different dimensions $d$. \label{fig:phaseShifts}}
+\end{figure}
 
 %\newpage
 \subsection{Infinite volume $I_0$}
@@ -120,7 +125,7 @@ Consider the following diagram defining $I_0$:
 \begin{figure}[h!]
 \center
 \includegraphics[width=.5\columnwidth]{figure/I0.eps}
-\caption{\label{fig:I0}}
+\caption{Loop diagram contributing to $I_0$.\label{fig:I0}}
 \end{figure}
 
 \noindent The loop integral with $E=p^2/m$ (on-shell relation) gives
@@ -230,10 +235,10 @@ This expression gives the poles of Eq.~\eqref{eqn:scattering amplitude} but usin
 
 \subsubsection{$d=3$}
 Using Eq.~\eqref{eqn:C 3} in Eq.~\eqref{eqn:quantization} we find
-\begin{multline}
-\frac{1/a_0-2\Lambda/\pi}{4\pi/m}-\frac{1}{L^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
+\begin{equation}
+\frac{1/a_0-2\Lambda/\pi}{4\pi/m}-\frac{1}{L^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0
 \implies-\frac{1}{a_0}=-\frac{4\pi}{mL^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }-\frac{2\Lambda}{\pi}\ .
-\end{multline}
+\end{equation}
 Now if we re-express the LHS in terms of the scattering phase relation given by Eq.~\eqref{eqn:phase shifts} (which is valid for delta function interactions), and after a little manipulation, we get
 \begin{align}
 p\cot \delta(p)&=\frac{1}{\pi L}\sum_{\vec{n}}^{\Lambda L/2\pi} \frac { 1 } { \vec{n}^2 -\left(\frac{pL}{2\pi}\right)^2}-\frac{2\Lambda}{\pi}\\
@@ -266,7 +271,7 @@ where
 S_2(x)\equiv\sum_{\vec{n}}^{\Lambda'} \frac { 1 } { \vec{n}^2 -x}-2\pi\log\left(\Lambda'\right)\ ,
 \end{equation}
 where $\Lambda'=\frac{\Lambda L}{2\pi}$.
-Here $\vec{n}=(n_x,n_y)$ is a doublet of integers and the limit $\Lambda'\to\infty$ is implicit.  This is new for me!  \autoref{fig:S2} shows the functional form of Eq.~\eqref{eqn:S2}.
+Here $\vec{n}=(n_x,n_y)$ is a doublet of integers and the limit $\Lambda'\to\infty$ is implicit.   \autoref{fig:S2} shows the functional form of Eq.~\eqref{eqn:S2}.
 \begin{figure}
 \center
 \includegraphics[width=.8\columnwidth]{figure/S2.pdf}
@@ -295,7 +300,6 @@ This function is valid for $x$ both positive and negative, and is shown in \auto
 \includegraphics[width=.8\columnwidth]{figure/S1.pdf}
 \caption{The function $S_1(x)$ defined in Eq.\eqref{eqn:S1}.\label{fig:S1}}
 \end{figure}
-Now this is also new for me!
 
 \begin{itemize}
 \item Bound state in $L\to\infty$ limit\todo{needs work}
