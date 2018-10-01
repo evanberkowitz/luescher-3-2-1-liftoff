@@ -11,7 +11,7 @@
 %\usepackage{amsaddr}
 \usepackage{epstopdf}
 \usepackage{booktabs}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{fancyhdr}
 \usepackage[yyyymmdd,hhmmss]{datetime}
 \pagestyle{fancy}
@@ -26,6 +26,23 @@
     linkcolor = darkred,
     urlcolor  = darkblue,
     citecolor = darkgreen]{hyperref}
+
+%%%
+%%%     Draft margin.
+%%%
+
+\usepackage[
+    angle=90,
+    color=black,
+    opacity=1,
+    scale=2,
+    ]{background}
+\SetBgPosition{current page.west}
+\SetBgVshift{-4.5mm}
+\backgroundsetup{contents={\input{git_information}}}
+
+\input{macros} % input rather than include so we don't create macros.aux
+
 
 %\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
