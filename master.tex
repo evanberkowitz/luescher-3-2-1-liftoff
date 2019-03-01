@@ -26,6 +26,9 @@
     linkcolor = darkred,
     urlcolor  = darkblue,
     citecolor = darkgreen]{hyperref}
+    
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 
 %\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -76,7 +79,7 @@ where $\vec{r}$ represents the relative distance between the two particles and $
 \caption{Bubble sum. Each vertex represents $-iC_0$ and the bubble represents $I_0$.\label{fig:bubbleSum}}
 \end{figure}
 
-\noindent The sum is a geometric series and gives\footnote{Note that the {\color{red} red} minus sign in Eq.~\eqref{eqn:scattering amplitude} is missing in the archive version of \cite{Beane:2003da}, but is present in \cite{Kaplan:1998we}.}
+\noindent The sum is a geometric series and gives\footnote{Note that the {\color{red} red} minus sign in eq.~\eqref{eqn:scattering amplitude} is missing in the archive version of \cite{Beane:2003da}, but is present in \cite{Kaplan:1998we}.}
 \begin{equation}\label{eqn:scattering amplitude}
 \frac{{\color{red}-}iC_0(\Lambda)}{1-I_0(p,\Lambda)C_0(\Lambda)}\equiv iT(p)\ ,
 \end{equation}
@@ -99,7 +102,7 @@ Therefore we have
 \frac{4}{m}\mathcal{F}_d\frac{1}{\cot \delta_0(p)-i}=\frac{-C_0(\Lambda)}{1-I_0(p,\Lambda)C_0(\Lambda)}
 }\ .
 \end{equation}
-We can recast Eq.~\eqref{eqn:T matrix matching},
+We can recast eq.~\eqref{eqn:T matrix matching},
 \begin{equation}\label{eqn:matching}
 \cot \delta_0(p)-i=\frac{4}{m}\mathcal{F}_d\left(\frac{-1}{C_0(\Lambda)}+I_0(p,\Lambda)\right)\ .
 \end{equation}
@@ -158,7 +161,7 @@ i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]\\
 =\frac{1}{2\pi^2}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q^2 \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
 -i\frac{m}{4\pi}p\ ,
 \end{multline}
-where we have used the on-shell condition $\sqrt{mE}=p$.  If we plug this into Eq.~\eqref{eqn:matching} we get
+where we have used the on-shell condition $\sqrt{mE}=p$.  If we plug this into eq.~\eqref{eqn:matching} we get
 \begin{equation}\label{eqn:matching 2}
 p\cot \delta_0(p)-ip=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}+\frac{1}{2\pi^2}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q^2 \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)\right)-ip\ .
 \end{equation}
@@ -173,6 +176,28 @@ Solving for $C_0(\Lambda)$ gives
 C_0(\Lambda)=\frac{4\pi/m}{1/a_0-2\Lambda/\pi}\ .
 \end{equation}
 
+\paragraph{The induced effective range and shape parameter in infinite volume\\}
+
+Instead of setting immediately $E=p^2/\mu = 0$ into eq.~\eqref{eqn:matching 2} to obtain eq.~\eqref{eqn:matching 3}, one could start with eq.~\eqref{eqn:matching 2} and actually analytically perform the principal value integral,
+\begin{equation}\label{eqn:effective range 1}
+p\cot \delta_0(p)-ip=\frac{4\pi}{m}\frac{-1}{C_0(\Lambda)}+\frac{2\Lambda}{\pi} \left(\frac{p}{\Lambda} \tanh ^{-1}\left(\frac{\Lambda }{p}\right)-1 \right)-ip\ ,
+\end{equation}
+where it is assumed that $p<\Lambda$.  Now expand the result in powers of $p/\Lambda$, 
+\begin{equation}\label{eqn:effective range 2}
+p\cot \delta_0(p)-ip=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}-\frac{m\Lambda}{2\pi^2}\right)-ip+\frac{2}{\pi\Lambda}p^2+\frac{2}{3\pi\Lambda^3}p^4+\mathcal{O}(p^6)\ .
+\end{equation}
+Now when we compare with the effective range expansion,
+\begin{displaymath}
+p\cot \delta_0(p)-ip=-\frac{1}{a_0}-ip+\frac{r_0}{2}p^2-Pr_0^3p^4+\mathcal{O}(p^6)\ ,
+\end{displaymath}
+we can immediately identify the shape and range parameters,
+\begin{align}
+-\frac{1}{a_0}&=\frac{4\pi}{m}\left(\frac{-1}{C_0(\Lambda)}-\frac{m\Lambda}{2\pi^2}\right)\label{eqn:another match}\\
+r_0 &= \frac{4}{\pi\Lambda}\\
+P &= -\frac{\pi^2}{96}\ .
+\end{align}
+Equation~\eqref{eqn:another match} agrees with eq.~\eqref{eqn:C 3}, as it should.  Obviously one can continue the expansion to higher orders in $p/\Lambda$ to obtain higher order shape parameters.  If one inteprets $\Lambda=\pi/\epsilon$, where $\epsilon$ is the lattice spacing, then these results correspond to an \emph{infinite volume} ($L=\infty)$ discretized lattice.  Only in the continuum limit does one truly have a zero range interaction.
+
 \subsubsection{$d=2$}
 We also have to regulate in this dimension, and use the same hard cutoff as in $d=3$.  Equation~\eqref{eqn:I0 general} becomes
 \begin{multline}
@@ -181,13 +206,13 @@ We also have to regulate in this dimension, and use the same hard cutoff as in $
 =\frac{1}{2\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
 -i\frac{m}{4}\ .
 \end{multline}
-Plugging this into Eq.~\eqref{eqn:matching} gives
+Plugging this into eq.~\eqref{eqn:matching} gives
 \begin{multline}
 \cot \delta_0(p)-i=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{m\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { E - \frac{\vec{q}^2}{m} } \right)
 -i\\
 \implies \frac { 2 } { \pi } \log \left( p a _ { 0 } \right)=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{m\pi}\mathcal{P}\int_0^\Lambda  \mathrm { d } q \ q \left( \frac { 1 } { \frac{p^2}{m} - \frac{\vec{q}^2}{m} } \right)\ ,
 \end{multline}
-where we plugged in the relevant expression from Eq.~\eqref{eqn:phase shifts}.
+where we plugged in the relevant expression from eq.~\eqref{eqn:phase shifts}.
 We now perform the integral,
 \begin{multline}
 \frac { 2 } { \pi } \log \left( p a _ { 0 } \right)=\frac{4}{m}\frac{-1}{C_0(\Lambda)}+\frac{2}{\pi } \log \left(\frac{p}{\sqrt{\Lambda ^2-p^2}}\right)\\
@@ -206,7 +231,7 @@ No regulator is needed in this case.  We have
 -i\frac{\pi m}{2q}\delta(q-\sqrt{mE})\right]
 =-i\frac{m}{2p}\ ,
 \end{equation}
-Plugging this into Eq.~\eqref{eqn:matching} gives
+Plugging this into eq.~\eqref{eqn:matching} gives
 \begin{equation}
 \cot \delta_0(p)-i=\frac{2p}{m}\frac{-1}{C_0(\Lambda)}-i
 \implies p a_0=\frac{2p}{m}\frac{-1}{C_0(\Lambda)}\ ,
@@ -231,15 +256,15 @@ Since we are interested in the eigenstates of the interacting system in the fini
 \begin{equation}\label{eqn:quantization}
 \frac { 1 } { C _ { 0 } (\Lambda ) } - \operatorname { Re } \left( I_0(p,L) \right) = 0\ .
 \end{equation}
-This expression gives the poles of Eq.~\eqref{eqn:scattering amplitude} but using a finite volume version of $I_0$.  With the expressions for $C_0(\Lambda)$ derived in the previous section we can re-derive L\"uscher's quantization conditions in the different dimensions.
+This expression gives the poles of eq.~\eqref{eqn:scattering amplitude} but using a finite volume version of $I_0$.  With the expressions for $C_0(\Lambda)$ derived in the previous section we can re-derive L\"uscher's quantization conditions in the different dimensions.
 
 \subsubsection{$d=3$}
-Using Eq.~\eqref{eqn:C 3} in Eq.~\eqref{eqn:quantization} we find
+Using eq.~\eqref{eqn:C 3} in eq.~\eqref{eqn:quantization} we find
 \begin{equation}
 \frac{1/a_0-2\Lambda/\pi}{4\pi/m}-\frac{1}{L^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0
 \implies-\frac{1}{a_0}=-\frac{4\pi}{mL^3}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }-\frac{2\Lambda}{\pi}\ .
 \end{equation}
-Now if we re-express the LHS in terms of the scattering phase relation given by Eq.~\eqref{eqn:phase shifts} (which is valid for delta function interactions), and after a little manipulation, we get
+Now if we re-express the LHS in terms of the scattering phase relation given by eq.~\eqref{eqn:phase shifts} (which is valid for delta function interactions), and after a little manipulation, we get
 \begin{align}
 p\cot \delta(p)&=\frac{1}{\pi L}\sum_{\vec{n}}^{\Lambda L/2\pi} \frac { 1 } { \vec{n}^2 -\left(\frac{pL}{2\pi}\right)^2}-\frac{2\Lambda}{\pi}\\
 &\equiv \frac{1}{\pi L}S_3\left(\left(\frac{pL}{2\pi}\right)^2\right)\ ,
@@ -252,17 +277,17 @@ and $\Lambda'=\frac{\Lambda L}{2\pi}$.  The limit $\Lambda'\to\infty$ is implici
 \begin{figure}
 \center
 \includegraphics[width=.8\columnwidth]{figure/S3.pdf}
-\caption{The function $S_3(x)$ defined in Eq.~\eqref{eqn:S3}.\label{fig:S3}}
+\caption{The function $S_3(x)$ defined in eq.~\eqref{eqn:S3}.\label{fig:S3}}
 \end{figure}
 
 \subsubsection{$d=2$}
-Using Eq.~\eqref{eqn:C 2} in Eq.~\eqref{eqn:quantization} we find
+Using eq.~\eqref{eqn:C 2} in eq.~\eqref{eqn:quantization} we find
 \begin{multline}
 -\frac{m \log (a_0\Lambda)}{2 \pi }-\frac{1}{L^2}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
 \implies
 \frac{2}{\pi}\log (pa_0)+\frac{2}{\pi}\log(\Lambda/p)=-\frac{4}{mL^2}\sum_{\vec{q}}^\Lambda \frac { 1 } { E - \frac{\vec{q}^2}{m} }\ .
 \end{multline}
-Now as in the previous section, we use the phase shift relation of Eq.~\eqref{eqn:phase shifts}, and after a little manipulation, We find
+Now as in the previous section, we use the phase shift relation of eq.~\eqref{eqn:phase shifts}, and after a little manipulation, We find
 \begin{equation}
 \cot \delta(p)=\frac{1}{\pi^2}S_2\left(\left(\frac{pL}{2\pi}\right)^2\right)+\frac{2}{\pi}\log\left(\frac{pL}{2\pi}\right)\ ,
 \end{equation}
@@ -271,21 +296,21 @@ where
 S_2(x)\equiv\sum_{\vec{n}}^{\Lambda'} \frac { 1 } { \vec{n}^2 -x}-2\pi\log\left(\Lambda'\right)\ ,
 \end{equation}
 where $\Lambda'=\frac{\Lambda L}{2\pi}$.
-Here $\vec{n}=(n_x,n_y)$ is a doublet of integers and the limit $\Lambda'\to\infty$ is implicit.   \autoref{fig:S2} shows the functional form of Eq.~\eqref{eqn:S2}.
+Here $\vec{n}=(n_x,n_y)$ is a doublet of integers and the limit $\Lambda'\to\infty$ is implicit.   \autoref{fig:S2} shows the functional form of eq.~\eqref{eqn:S2}.
 \begin{figure}
 \center
 \includegraphics[width=.8\columnwidth]{figure/S2.pdf}
-\caption{The function $S_2(x)$ defined in Eq.~\eqref{eqn:S2}.\label{fig:S2}}
+\caption{The function $S_2(x)$ defined in eq.~\eqref{eqn:S2}.\label{fig:S2}}
 \end{figure}
 
 \subsubsection{$d=1$}
-Using Eq.~\eqref{eqn:C 1} in Eq.~\eqref{eqn:quantization} We find
+Using eq.~\eqref{eqn:C 1} in eq.~\eqref{eqn:quantization} We find
 \begin{equation}
 -\frac{ma_0}{2}-\frac{1}{L}\sum_{\vec{q}} \frac { 1 } { E - \frac{\vec{q}^2}{m} }=0
 \implies
 p a_0=-\frac{2p}{mL}\sum_{\vec{q}} \frac { 1 } { E - \frac{\vec{q}^2}{m} }\ .
 \end{equation}
-Again, we use Eq.~\eqref{eqn:phase shifts}, and after a little manipulation, we get
+Again, we use eq.~\eqref{eqn:phase shifts}, and after a little manipulation, we get
 \begin{align}
 \frac{1}{p}\cot\delta_0(p)=a_0&=\frac{L}{2\pi^2}\sum_{n=-\infty}^{\infty} \frac { 1 } { n^2 -\left(\frac{pL}{2\pi}\right)^2}\\
  &\equiv\frac{L}{2\pi^2} S_1\left(\left(\frac{pL}{2\pi^2}\right)^2\right)\ ,
