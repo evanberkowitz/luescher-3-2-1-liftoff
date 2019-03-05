@@ -225,11 +225,11 @@ has coefficient $\mathcal{L}_\circ$ originating from an integration in spherical
 \begin{displaymath}
 \frac{1}{2\pi^2}\int_0^\infty q^2\left(\frac{1}{-q^2/m}\right)\Longrightarrow\frac{1}{(2\pi)^3}\int_{-\Lambda}^{\Lambda}dq_x dq_y dq_z\left(\frac{1}{-q^2/m}\right)\ ,
 \end{displaymath}
-one would also have a linear-in-$\Lambda$ counterterm but with a different coefficient,
+one would also have a linear-in-$\Lambda$ counterterm but with a different coefficient\footnote{I was not smart enough to determine an analytic result for the coefficient.},
 \begin{displaymath}
 \mathcal{L}_{\square}\Lambda=0.777551\ \Lambda\ .
 \end{displaymath}
-This means that the matching should give us\footnote{Though I do not derive it, I believe the effective range and shape parameters should be independent of how one does te integration, and thus should be the same as in the spherical integration case.}
+This means that the matching should give us\footnote{Though I do not derive it, I believe the effective range and shape parameters should be independent of how one does the integration, and thus should be the same as in the spherical integration case.}
 \begin{align}
 -\frac{1}{a_0}&=\frac{4\pi}{m}\frac{-1}{C_0(\Lambda)}-\mathcal{L}_\square\Lambda\label{eqn:yet another match}\\
 r_0 &= \frac{4}{\pi\Lambda}\\
@@ -325,7 +325,20 @@ Equation~\eqref{eqn:S3} is the result derived using a sum based on spherical coo
 \frac{1/a_0-\mathcal{L}_\square\Lambda}{4\pi/m}-\frac{1}{L^3}\sum_{q_i\in\ (-\Lambda,\Lambda]}\frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
 \implies-\frac{1}{a_0}=-\frac{4\pi}{mL^3}\sum_{q_i\in\ (-\Lambda,\Lambda]} \frac { 1 } { E - \frac{\vec{q}^2}{m} }-\mathcal{L}_\square\Lambda\ .
 \end{multline}
-
+Now replace $E=p^2/m$ and $\vec{q}=2\pi\vec{n}/L$ with $\vec{n}=(n_x,n_y,n_z)$. Then we have
+\begin{equation}
+-\frac{1}{a_0}=\frac{1}{\pi L}\sum_{-\frac{\Lambda L}{2\pi}<n_i\le\frac{\Lambda L}{2\pi}} \frac { 1 } { n^2 - \left(\frac{pL}{2\pi}\right)^2 }-\mathcal{L}_\square\Lambda\ .
+\end{equation}
+Now define $\Lambda'=\frac{\Lambda L}{2\pi}$, 
+\begin{align}
+-\frac{1}{a_0}=&\frac{1}{\pi L}\sum_{-\Lambda'<n_i\le\Lambda'} \frac { 1 } { n^2 - \left(\frac{pL}{2\pi}\right)^2 }-\mathcal{L}_\square\frac{2\pi}{L}\Lambda'\\
+\equiv& \frac{1}{\pi L}S_\square\left(\left(\frac{pL}{2\pi}\right)^2\right)\ ,
+\end{align}
+where
+\begin{equation}
+S_\square\left(x\right)\equiv\sum_{-\Lambda'<n_i\le\Lambda'} \frac { 1 } { \vec{n}^2 -x}-\mathcal{L}_\square2\pi^2\Lambda'\ .
+\end{equation}
+This is what I call the ``cartesian S-function".  Now for a discretized lattice with lattice spacing $\epsilon$, the allowed momenta in any of the cartesian directions (assuming symmetric volume) fall within $q_i\in(-\frac{\pi}{\epsilon},\frac{\pi}{\epsilon}]$.  So I identify $\Lambda = \pi/\epsilon$, which means that $\Lambda'=\frac{L}{2\epsilon}$.  Obviously $L/\epsilon$ is simply the number of lattice points on a side.
 
 \subsubsection{$d=2$}
 Using eq.~\eqref{eqn:C 2} in eq.~\eqref{eqn:quantization} we find
