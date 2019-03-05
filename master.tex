@@ -215,6 +215,27 @@ P &= -\frac{\pi^2}{96}\ .
 \end{align}
 Equation~\eqref{eqn:another match} agrees with eq.~\eqref{eqn:C 3}, as it should\footnote{For comparison, the effective range parameters for hard-sphere scattering of radius $R$ are $a_0=R$, $r_0=2R/3$, and $P=-3/40$.}.  Obviously one can continue the expansion to higher orders in $p/\Lambda$ to obtain higher order shape parameters.  If one inteprets $\Lambda=\pi/\epsilon$, where $\epsilon$ is the lattice spacing, then these results correspond to an \emph{infinite volume} ($L=\infty)$ discretized lattice.  Only in the continuum limit does one truly have a zero range interaction.  
 
+\paragraph{Comment on spherical vs cartesian integration\\}
+
+The counter term in eq.~\eqref{eqn:matching 3},
+\begin{displaymath}
+\frac{2}{\pi}\Lambda \equiv \mathcal{L}_\circ\Lambda\ ,
+\end{displaymath}
+has coefficient $\mathcal{L}_\circ$ originating from an integration in spherical coordinates.  If one instead had done the integral in cartesian coordinates,
+\begin{displaymath}
+\frac{1}{2\pi^2}\int_0^\infty q^2\left(\frac{1}{-q^2/m}\right)\Longrightarrow\frac{1}{(2\pi)^3}\int_{-\Lambda}^{\Lambda}dq_x dq_y dq_z\left(\frac{1}{-q^2/m}\right)\ ,
+\end{displaymath}
+one would also have a linear-in-$\Lambda$ counterterm but with a different coefficient,
+\begin{displaymath}
+\mathcal{L}_{\square}\Lambda=0.777551\ \Lambda\ .
+\end{displaymath}
+This means that the matching should give us\footnote{Though I do not derive it, I believe the effective range and shape parameters should be independent of how one does te integration, and thus should be the same as in the spherical integration case.}
+\begin{align}
+-\frac{1}{a_0}&=\frac{4\pi}{m}\frac{-1}{C_0(\Lambda)}-\mathcal{L}_\square\Lambda\label{eqn:yet another match}\\
+r_0 &= \frac{4}{\pi\Lambda}\\
+P &= -\frac{\pi^2}{96}\ .
+\end{align}
+
 \subsubsection{$d=2$}
 We also have to regulate in this dimension, and use the same hard cutoff as in $d=3$.  Equation~\eqref{eqn:I0 general} becomes
 \begin{multline}
@@ -296,6 +317,15 @@ and $\Lambda'=\frac{\Lambda L}{2\pi}$.  The limit $\Lambda'\to\infty$ is implici
 \includegraphics[width=.8\columnwidth]{figure/S3.pdf}
 \caption{The function $S_3(x)$ defined in eq.~\eqref{eqn:S3}.\label{fig:S3}}
 \end{figure}
+
+\paragraph{3-d result in a Cartesian basis\\}
+
+Equation~\eqref{eqn:S3} is the result derived using a sum based on spherical coordinates.  If one instead used a sum based in cartesian coordinates, which I think is what should be done when comparing with direct numerical calculations in a box, one would start with 
+\begin{multline}
+\frac{1/a_0-\mathcal{L}_\square\Lambda}{4\pi/m}-\frac{1}{L^3}\sum_{q_i\in\ (-\Lambda,\Lambda]}\frac { 1 } { E - \frac{\vec{q}^2}{m} }=0\\
+\implies-\frac{1}{a_0}=-\frac{4\pi}{mL^3}\sum_{q_i\in\ (-\Lambda,\Lambda]} \frac { 1 } { E - \frac{\vec{q}^2}{m} }-\mathcal{L}_\square\Lambda\ .
+\end{multline}
+
 
 \subsubsection{$d=2$}
 Using eq.~\eqref{eqn:C 2} in eq.~\eqref{eqn:quantization} we find
